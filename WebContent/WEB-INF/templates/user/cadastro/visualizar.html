@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Blank</title>
+ 	<meta charset="utf-8" />
+ 	
+ 	<link rel="stylesheet" type="text/css" href="css/default.css" th:href="@{/css/default.css}" />
+</head>
+<body>
+	<div th:include="fragments/default :: navbar">
+    </div>
+
+	<div th:include="fragments/default :: deleteModal">
+    </div>
+
+    <div id="main" class="container">
+ 	  <h3 class="page-header">Visualizar Item</h3>
+ 	
+	  <div class="row">
+		  <div class="col-md-4">
+		    <p><strong>Id</strong></p>
+		    <p><span th:text="${cliente.id}"></span></p>
+		  </div>
+		  <div class="col-md-4">
+		    <p><strong>Nome Fantasia</strong></p>
+		    <p><span th:text="${cliente.nomeFantasia}"></span></p>
+		  </div>
+		  <div class="col-md-4">
+		    <p><strong>Razão Social</strong></p>
+		    <p><span th:text="${cliente.razaoSocial}"></span></p>
+		  </div>
+	  </div>
+
+	  <hr />
+	  <div id="actions" class="row">
+	    <div class="col-md-12">
+	      <a class="btn btn-warning btn-xs" th:href="@{/user/cadastro/alterar/{id}(id=${cliente.id})}" role="button">Alterar</a>
+	      <a href="#" class="btn btn-danger" role="button" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+	      <a class="btn btn-secondary" th:href="@{/user/cadastro/listagem}" role="button">Fechar</a>
+	    </div>
+	  </div>
+	</div>
+	
+</body>
+</html>

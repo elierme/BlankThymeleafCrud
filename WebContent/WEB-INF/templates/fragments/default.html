@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+</head>
+<body>
+	<div th:fragment="navbar">
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+			integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+			crossorigin="anonymous"></link>
+
+		<nav
+			class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarsExampleDefault"
+				aria-controls="navbarsExampleDefault" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="#">Projeto X</a>
+
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/user/home}">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/cadastro/listagem}">Cadastro</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Sair</a></li>
+				</ul>
+			</div>
+		</nav>
+
+
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+			integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+			integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+			integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+			crossorigin="anonymous"></script>
+	</div>
+
+	<div th:fragment="deleteModal">
+		<!-- Modal -->
+		<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+			aria-labelledby="modalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+					</div>
+					<div class="modal-body">Deseja realmente excluir este item?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">Sim</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:fragment="search">
+		<div class="input-group h2">
+			<input name="data[search]" class="form-control" id="search"
+				type="text" placeholder="Pesquisar Itens"></input> <span
+				class="input-group-btn">
+				<button class="btn btn-primary" type="submit">
+					<span class="glyphicons glyphicons-search"></span>
+				</button>
+			</span>
+		</div>
+	</div>
+
+
+	<div th:fragment="pagination">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"
+					th:class="${currentIndex == 1}? 'Disable' : ''"><span
+					class="page-link" th:if="${currentIndex == 1}">Primeiro</span> <a
+					class="page-link" th:if="${currentIndex != 1}"
+					th:href="@{{url}1 (url=${baseUrl})}">Primeiro</a></li>
+
+				<li class="page-item"
+					th:class="${currentIndex == 1}? '' : 'Disable'"><span
+					class="page-link" th:if="${currentIndex == 1}">&laquo;</span> <a
+					class="page-link" aria-label="Previous"
+					th:if="${currentIndex != 1}"
+					th:href="@{{url}{index} (url=${baseUrl}, index=${currentIndex-1})}"
+					title="Pagina Anterior"> <span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span>
+				</a></li>
+
+				<li class="page-item"
+					th:each="item : ${#numbers.sequence(beginIndex, endIndex)}"
+					th:class="${item == currentIndex}? 'Active' : ''"><span
+					class="page-link" th:if="${item == currentIndex}" th:text="${item}">1</span>
+					<a class="page-link" th:if="${item != currentIndex}"
+					th:href="@{{url}{index} (url=${baseUrl}, index=${item})}"
+					th:text="${item}">1</a></li>
+
+				<li class="page-item"
+					th:class="${currentIndex != totalPageCountIndex}? '' : 'Disable'">
+					<span class="page-link"
+					th:if="${currentIndex == totalPageCountIndex}">&raquo;</span> <a
+					class="page-link" aria-label="Next"
+					th:if="${currentIndex != totalPageCountIndex}"
+					th:href="@{{url}{index} (url=${baseUrl}, index=${currentIndex +1})}"
+					title="Pagina Posterior"> <span aria-hidden="true">&raquo;</span>
+						<span class="sr-only">Next</span>
+				</a>
+				</li>
+
+				<li class="page-item"
+					th:class="${currentIndex == totalPageCountIndex}? 'Disable' : ''">
+					<span class="page-link"
+					th:if="${currentIndex == totalPageCountIndex}">Último</span> <a
+					class="page-link" th:if="${currentIndex != totalPageCountIndex}"
+					th:href="@{{url}{index} (url=${baseUrl}, index=${totalPageCountIndex})}">Último</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+
+</body>
+</html>

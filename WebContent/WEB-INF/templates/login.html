@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Blank</title>
+	<meta charset="utf-8" />
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
+	
+	<link  rel="stylesheet" type="text/css" href="css/login.css" th:href="@{/css/login.css}" />
+  </head>
+  <body>
+  
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+		integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+		crossorigin="anonymous"></script>
+  
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+	   integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <div class="container">
+
+      <form class="form-signin" th:action="@{/login}" method="post">
+        <h2 class="form-signin-heading">Informe Seu Login</h2>
+        <input type="text"  class="form-control" placeholder="Usuário" name="username" ></input>
+        <input type="password"  class="form-control" placeholder="Senha" name="password"></input>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me</input>
+          </label>
+        </div>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar"></input>
+        <a class="btn btn-lg btn-primary btn-block" th:href="@{/}" >Voltar</a>
+      </form>
+
+    </div> <!-- /container -->
+  </body>
+</html>
